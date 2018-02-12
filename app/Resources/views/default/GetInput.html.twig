@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Input Money</title>
+</head>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <script src = "https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<body>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <script src = "https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<body>
+
+  <ul class="nav nav-tabs">
+  <li class="nav-item">
+    <a class="nav-link active" href="{{ path('homepage')}}">Debit</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="{{ path('money_credit')}}">Credit</a>
+  </li>
+</ul>
+<br/>
+<br/>
+<center><h1>Total Money Remaining {{ getDiff }}</h1></center>
+<br/>
+<br/>
+<div class="form-control">
+  <div class="container">
+    <h1>Debit</h1>
+{{ form_start(getMoneyInput) }}
+{{ form_widget(getMoneyInput.firstBalance,{attr:{'min':'1','class':'form-control'}}) }}
+{{ form_errors(getMoneyInput.firstBalance) }}
+<br/>
+<input type="submit"  class="btn btn-info" name="submit">
+{{ form_end(getMoneyInput) }}
+<br/>
+  </div>
+</div>
+<br>
+<div class="container">
+<table class = "table table-bordered">
+<h1>Todays Transaction</h1>
+  <tr>
+    <th>Balance Money</th>
+    <th>Deposited Money</th>
+    <th>Total Balance</th>
+    <th>Date</th>
+  </tr>
+{% for getInfo in getInfo if getInfo.dateManipulation|date('Y-m-d') == mydatenow|date('Y-m-d') %}
+  <tr>
+    <td>{{ getInfo.oldBalance }}</td>
+    <td>{{ getInfo.firstBalance }}</td>
+    <td>{{ getInfo.totalBalance }}</td>
+    <td>{{ getInfo.dateManipulation|date('Y-m-d') }}</td>
+  </tr>
+{% endfor %}
+</table>
+
+</div>
+<br/>
+<div class="container">
+<a class="btn btn-info" href="{{ path('view_all_debit_transaction')}}">View All Debit Transaction</a>
+</div>
+
+</body>
+</html>

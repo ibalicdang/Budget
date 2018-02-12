@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>View All Credit Transaction</title>
+</head>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <script src = "https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<body>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <script src = "https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<body>
+
+  <ul class="nav nav-tabs">
+  <li class="nav-item">
+    <a class="nav-link" href="{{ path('homepage')}}">Debit</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link " href="{{ path('money_credit')}}">Credit</a>
+  </li>
+</ul>
+<br/>
+<br/>
+<br/>
+<br/> 
+
+<br>
+<div class="container">
+<table class = "table table-bordered" id="creditTransactions">
+  <h1>All Credit Transactions</h1>
+  <label>Select Date From:</label>
+  <input class="form-control datepicker" type="" name="" id="fromDate" required="">
+  <label>Select Date To:</label>
+  <input class="form-control datepicker" type="" name="" id="toDate" required="">
+  <br/>
+  <a class="btn btn-info search" name="search" type="submit" href="#">Search</a>
+  <br/>
+  <br/>
+  <tr>
+    <th>Balance Money</th>
+    <th>Withdrawn</th>
+    <th>Description</th>
+    <th>Balance Left</th>
+    <th>Date</th>
+  </tr>
+{% for getTotalExpenseTable in getTotalExpenseTable %}
+  <tr>
+    <td>{{ getTotalExpenseTable.oldBalance }}</td>
+    <td id="amtbl_0">{{ getTotalExpenseTable.expenseValue }}</td>
+    <td>{{ getTotalExpenseTable.myDiscription }}</td>
+    <td>{{ getTotalExpenseTable.newBalance}}</td>
+    <td>{{ getTotalExpenseTable.dateManipulation|date('Y-m-d') }}</td>
+  </tr>
+{% endfor %}
+</table>
+<label id="totlbl" />
+</div>
+
+</body>
+</html>
+
+<script>
+  $( function() {
+    $( ".datepicker" ).datepicker({dateFormat:'yy-mm-dd'});
+  } );
+</script>
+
+<script type="text/javascript">
+$(function(){
+  var grandTotal = 0;
+  $("[id*=amtbl]").each(function(){
+    grandTotal = grandTotal + parseFloat($(this).html());
+  });
+  $("[id*=totlbl]").html("Total Money Withdrawn = "+grandTotal.toString());
+});
+</script>
+
+
+
+<script type="text/javascript">
+  $(".search").on("click", function(){
+      var fromDatez = document.getElementById("fromDate").value;
+      var toDatez =  document.getElementById("toDate").value;
+
+      var path = "{{ path('view_all_credit_transaction',{'fromDate':'fromDates','toDate':'toDates'})}}";
+      path = path.replace("fromDates", fromDatez);
+      path = path.replace("toDates", toDatez);
+
+      window.location.href= path;
+
+//       $.ajax({
+//         url:path,
+//         type:"POST"
+//       }).done(function(data,msg){
+        
+//         for (i = 0; i < data.length; i++) {
+//           console.log(data);
+//           $("#creditTransactions").append($("<tr><td>"+data[0].t_id+"</td><td>"+data[0].t_dateManipulation+"</td><td>"+data[0].t_myDiscription+"</td><td>"+data[0].t_oldBalance+"</td><td>"+data[0].t_dateManipulation.date.split(" ")[0]+
+// "</td></tr>"));  
+
+
+//           data[0+1];
+
+//         }
+//           console.log(msg);
+
+//       });
+  });
+  </script>
