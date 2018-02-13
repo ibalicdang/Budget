@@ -50,6 +50,7 @@ class ExpenseRepository extends EntityRepository
 		 $searchQuery = $this->_em->getRepository('AppBundle:Expense')
 		->createQueryBuilder('t')
 		->andWhere('t.dateManipulation BETWEEN :from AND :to')
+		->andWhere('t.deleteStatus = 0')
 		->setParameter('from', $dateFromz)
         ->setParameter('to', $toDatez)
 		->getQuery()
@@ -68,6 +69,7 @@ class ExpenseRepository extends EntityRepository
 		 $searchQuery = $this->_em->getRepository('AppBundle:Expense')
 		->createQueryBuilder('t')
 		->andWhere('t.dateManipulation BETWEEN :from AND :to')
+		->andWhere('t.deleteStatus = 0')
 		->setParameter('from', $dateFromz)
         ->setParameter('to', $toDatez)
 		->getQuery()
@@ -76,6 +78,7 @@ class ExpenseRepository extends EntityRepository
 		return $searchQuery;
 	}
 
+	
 
 }
 

@@ -51,6 +51,13 @@ class BalanceMoney
     private $oldBalance;
 
     /**
+     * @var int
+     *
+     * @ORM\Column(name="deleteStatus", type="integer")
+     */
+    private $deleteStatus;
+
+    /**
      * Get id
      *
      * @return integer 
@@ -150,5 +157,28 @@ class BalanceMoney
     public function getoldBalance()
     {
         return $this->oldBalance;
+    }
+
+    /**
+     * Set deleteStatus
+     *
+     * @param integer $deleteStatus
+     * @return BalanceMoney
+     */
+    public function setDeleteStatus($deleteStatus)
+    {
+        $this->deleteStatus = $deleteStatus;
+
+        return $this;
+    }
+
+    /**
+     * Get deleteStatus
+     *
+     * @return integer 
+     */
+    public function getDeleteStatus()
+    {
+        return $this->deleteStatus;
     }
 }

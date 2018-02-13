@@ -56,6 +56,12 @@ class Expense
      */
     private $newBalance;
 
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="deleteStatus", type="integer", nullable=TRUE)
+     */
+    private $deleteStatus;
 
     /**
      * Get id
@@ -180,6 +186,29 @@ class Expense
     public function getNewBalance()
     {
         return $this->newBalance;
+    }
+
+    /**
+     * Set deleteStatus
+     *
+     * @param integer $deleteStatus
+     * @return Expense
+     */
+    public function setDeleteStatus($deleteStatus)
+    {
+        $this->deleteStatus = $deleteStatus;
+
+        return $this;
+    }
+
+    /**
+     * Get deleteStatus
+     *
+     * @return integer 
+     */
+    public function getDeleteStatus()
+    {
+        return $this->deleteStatus;
     }
 
 
